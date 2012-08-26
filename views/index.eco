@@ -6,6 +6,9 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <ul>
+    <%= for film in films %>
+    <li><%= film %></li>
+    </ul>
   </body>
 </html>
