@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "express": "3.0.0rc3",
-    "eco": "*",
+    "ejs": "*",
     "less-middleware": "*",
     "mocha": "*",
     "coffee-script": "*"
