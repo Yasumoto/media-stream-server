@@ -13,5 +13,4 @@ exports.index = (req, res) ->
     if mime.lookup(filename) is 'video/mp4'
       movieFiles.push filename
   emitter.on 'end', () ->
-    console.log movieFiles
     res.render 'index', { files: movieFiles }

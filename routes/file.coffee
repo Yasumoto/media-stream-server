@@ -13,7 +13,7 @@ exports.fileServing = (req, res) ->
   filename = '/' + req.params[0]
   fs.stat filename, (err, stats) ->
     if err
-      res.writeHead 404
+      res.writeHead 404, { "Content-Type": "text/html" }
       res.end "404 not found."
       console.log err
     else
@@ -23,7 +23,9 @@ exports.fileServing = (req, res) ->
         Connection: "keep-alive",
         "Content-Disposition": "inline; filename=" + filename + ";",
         "Content-Transfer-Encoding": "binary",
-        "Content-Length": stats.size
+        "Content-Length": stats.size + 1,
+        "Last-Modified": stats.mtime.toUTCString(),
+        "Transfer-Encoding": "chunked"
       }
       stream = fs.createReadStream filename, { flags: "r", start: 0, end: stats.size }
 
