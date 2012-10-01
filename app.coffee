@@ -1,9 +1,10 @@
-express = require 'express'
-routes  = require './routes'
+express       = require 'express'
+http          = require 'http'
+routes        = require './routes'
 {fileServing} = require './routes/file'
-{filePage} = require './routes/filePage'
-http    = require 'http'
-path    = require 'path'
+{filePage}    = require './routes/filePage'
+path          = require 'path'
+util          = require 'util'
 
 app = express()
 
@@ -25,7 +26,11 @@ app.configure 'development', () ->
 app.get '/', routes.index
 app.get '/link/*', filePage
 app.get '/movies/*', fileServing
+app.get '/quitquitquit', (req, res) ->
+  res.end 'peace out'
+  util.log 'exiting via /quitquitquit'
+  process.exit()
 
 http.createServer(app).listen app.get('port'), () ->
-  console.log "Express server listening on port " + app.get('port')
+  console.log 'Express server listening on port ' + app.get('port')
 
