@@ -25,12 +25,3 @@ app.get '/', routes.index
 http.createServer(app).listen app.get('port'), () ->
   console.log "Express server listening on port " + app.get('port')
 
-
-staticServer = require 'static'
-
-fileServer = new staticServer.Server('./public');
-
-require('http').createServer( (request, response) ->
-    request.addListener 'end', () ->
-        fileServer.serve(request, response)
-).listen(8080)
