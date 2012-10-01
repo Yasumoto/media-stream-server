@@ -1,5 +1,6 @@
 express = require 'express'
 routes  = require './routes'
+{fileServing} = require './routes/file'
 http    = require 'http'
 path    = require 'path'
 
@@ -21,6 +22,7 @@ app.configure 'development', () ->
   app.use express.errorHandler()
 
 app.get '/', routes.index
+app.get '/movies/*', fileServing
 
 http.createServer(app).listen app.get('port'), () ->
   console.log "Express server listening on port " + app.get('port')
