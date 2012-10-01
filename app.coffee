@@ -26,9 +26,9 @@ http.createServer(app).listen app.get('port'), () ->
   console.log "Express server listening on port " + app.get('port')
 
 
-static = require 'static'
+staticServer = require 'static'
 
-fileServer = new static.Server('./public');
+fileServer = new staticServer.Server('./public');
 
 require('http').createServer( (request, response) ->
     request.addListener 'end', () ->
