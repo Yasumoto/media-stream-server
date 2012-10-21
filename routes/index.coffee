@@ -12,6 +12,9 @@ exports.index = (req, res) ->
   movieFiles = []
   emitter.on 'file', (filename, stat) ->
     if mime.lookup(filename) is 'video/mp4'
-      movieFiles.push path.basename filename
+      pathname = path.basename filename
+      linkname = encodeURIComponent path.relative process.env.SERVING_DIRECTORY, filename
+      movie = { name: pathname, linkname: linkname }
+      movieFiles.push movie
   emitter.on 'end', () ->
     res.render 'index', { files: movieFiles }
